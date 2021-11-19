@@ -18,14 +18,19 @@ public class Garden {
         switch (userChoice) {
             case 1:
                 //create butterfly with abstract factory
-                //get shape factory
-                AbstractGardenFactory gardenFactory = FactoryProducer.getFactory(true);
-                Insect insect1 = gardenFactory.getInsect("Butterfly");
+                AbstractGardenFactory gardenFactory1 = FactoryProducer.getFactory(true);
+                Insect insect1 = gardenFactory1.getInsect("Butterfly");
                 insect1.produceInsect();
-                Insect insect2 = gardenFactory.getInsect("Bumblebee");
+                Insect insect2 = gardenFactory1.getInsect("Bumblebee");
                 insect2.produceInsect();
                 break;
-            case 2: //create flower with abstract factory
+            case 2:
+                //create flower with abstract factory
+                AbstractGardenFactory gardenFactory2 = FactoryProducer.getFactory(false);
+                Plant plant1 = gardenFactory2.getPlant("Rose");
+                plant1.producePlant();
+                Plant plant2 = gardenFactory2.getPlant("Peony");
+                plant2.producePlant();
                 break;
             case 3: //change the color of butterfly or flower
                 break;

@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class GardenSimulator {
 
     public static void main(String[] args) {

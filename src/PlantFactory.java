@@ -4,8 +4,8 @@ public class PlantFactory extends AbstractGardenFactory{
         //This is going to return a plant
         if(type.equalsIgnoreCase("Rose")){
             return new Rose();
-        }else if(type.equalsIgnoreCase("Peony")){
-            return new Peony();
+        }else if(type.equalsIgnoreCase("Tulip")){
+            return new Tulip();
         }
         return null;
     }
