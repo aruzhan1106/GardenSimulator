@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class Garden {
+public class Garden{
     private boolean playing;
     List<Plant> plants = new ArrayList<>();
     List<Insect> insects = new ArrayList<>();
@@ -12,7 +13,8 @@ public class Garden {
     public boolean isPlaying() {
         return playing;
     }
-    public void displayGarden(){
+    public void displayGarden() {
+        System.out.println("╔════════════════════════╗");
         if(!plants.isEmpty()){
             for (Plant p: plants){
                 System.out.println(p.toString());
@@ -23,7 +25,9 @@ public class Garden {
                 System.out.println(i.toString());
             }
         }
+        System.out.println("╚═══════════════════════╝");
     }
+
     public void mainMenu(){
         displayGarden();
         System.out.println("\n＊*•̩̩͙✩•̩̩͙*˚　G A R D E N  ˚*•̩̩͙✩•̩̩͙*˚＊");
@@ -78,6 +82,7 @@ public class Garden {
                 }
                 break;
             case 3:
+                //change the color of a flower
                 if(plants!=null){
                     for (Plant p: plants){
                         System.out.println(p.toString());
@@ -85,8 +90,15 @@ public class Garden {
                 }
                 System.out.println("Which flower's color do you want to change?");
                 int colorChangeChoice = scanner.nextInt();
-                //new RedPlantDecorator(new );
-                //change the color of a flower
+                if(Objects.equals(plants.get(colorChangeChoice - 1).getFlowerType(), "Tulip")){
+                    Plant newPlant = new RedTulipDecorator(new Tulip());
+                    plants.set(colorChangeChoice - 1,newPlant);
+                }
+                else if (Objects.equals(plants.get(colorChangeChoice - 1).getFlowerType(), "Rose")){
+                    Plant newPlant = new PinkRoseDecorator(new Rose());
+                    plants.set(colorChangeChoice - 1,newPlant);
+                    newPlant.notifyObserver();
+                }
                 break;
             case 4:
                 if(!insects.isEmpty()){

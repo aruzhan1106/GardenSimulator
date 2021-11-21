@@ -6,4 +6,10 @@ public class Tulip implements Plant{
     public String toString() {
         return " \uD83C\uDF37 There's a white tulip in the garden";
     }
+    public String getFlowerType() {
+        return "Tulip";
+    }
+    public void notifyObserver(){
+        System.out.println("\nYou have changed the flower's color\n");
+    }
 }

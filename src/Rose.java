@@ -8,4 +8,10 @@ public class Rose implements Plant{
     public String toString() {
         return " \uD83C\uDF39 There's a white rose in the garden";
     }
+    public String getFlowerType() {
+        return "Rose";
+    }
+    public void notifyObserver(){
+        System.out.println("\nYou have changed the flower's color\n");
+    }
 }
