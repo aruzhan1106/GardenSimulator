@@ -14,7 +14,8 @@ public class Garden{
         return playing;
     }
     public void displayGarden() {
-        System.out.println("╔════════════════════════╗");
+        System.out.println("╔════════════════════════════╗");
+        System.out.println("＊*•̩̩͙✩•̩̩͙*˚　G A R D E N  ˚*•̩̩͙✩•̩̩͙*˚＊");
         if(!plants.isEmpty()){
             for (Plant p: plants){
                 System.out.println(p.toString());
@@ -25,19 +26,18 @@ public class Garden{
                 System.out.println(i.toString());
             }
         }
-        System.out.println("╚═══════════════════════╝");
+        System.out.println("╚════════════════════════════╝");
     }
 
     public void mainMenu(){
         displayGarden();
-        System.out.println("\n＊*•̩̩͙✩•̩̩͙*˚　G A R D E N  ˚*•̩̩͙✩•̩̩͙*˚＊");
         System.out.println("\nWhat would you like to do?");
         System.out.println("""
                 1. Add Insect
                 2. Add Flower
                 3. Change Color of a Flower
                 4. Feed the Insects
-                5. Save a Flower
+                5. Ask the Gardener to Take Care of the Hedges
                 6. Exit""");
         int userChoice;
         Scanner scanner = new Scanner(System.in);
@@ -93,6 +93,7 @@ public class Garden{
                 if(Objects.equals(plants.get(colorChangeChoice - 1).getFlowerType(), "Tulip")){
                     Plant newPlant = new RedTulipDecorator(new Tulip());
                     plants.set(colorChangeChoice - 1,newPlant);
+                    newPlant.notifyObserver();
                 }
                 else if (Objects.equals(plants.get(colorChangeChoice - 1).getFlowerType(), "Rose")){
                     Plant newPlant = new PinkRoseDecorator(new Rose());
@@ -101,6 +102,7 @@ public class Garden{
                 }
                 break;
             case 4:
+                //feeding the insects
                 if(!insects.isEmpty()){
                     HungerState hungerState = new HungerState();
                     hungerState.doAction(insects.get(0));
@@ -114,7 +116,16 @@ public class Garden{
                     System.out.println("There are no insects in the garden to eat the food");
                 }
                 break;
-            case 5: //use memento pattern to save object state
+            case 5:
+                //command pattern to order the gardener
+                System.out.println("You tell the gardener to water the hedges and trim them");
+                Hedge hedges = new Hedge();
+                WaterHedges waterHedgesOrder = new WaterHedges(hedges);
+                TrimHedges trimHedges = new TrimHedges(hedges);
+                Gardener gardener = new Gardener();
+                gardener.takeOrder(waterHedgesOrder);
+                gardener.takeOrder(trimHedges);
+                gardener.placeOrders();
                 break;
             case 6:
                 System.out.println("Goodbye! Come back soon!");
